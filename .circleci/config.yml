@@ -5,19 +5,19 @@ jobs:
     - image: circleci/ruby:2.4
     steps:
     - checkout
-    - run: bundle install
+    - run: apt-get install tree
   test1:
     docker:
     - image: circleci/ruby:2.4
     steps:
     - checkout
-    - run: bundle install
-  test2:
-    docker:
-    - image: circleci/ruby:2.4
-    steps:
-    - checkout
-    - run: bundle install
+    - run: install git
+ # test2:
+  #  docker:
+   # - image: circleci/ruby:2.4
+    #steps:
+    #- checkout 
+    #- run: bundle install
 
 #workflows:
   #version: 2
