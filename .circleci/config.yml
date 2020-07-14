@@ -1,13 +1,47 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
-version: 2.1
-# Use a package of configuration called an orb.
-orbs:
-  # Declare a dependency on the welcome-orb
-  welcome: circleci/welcome-orb@0.4.1
-# Orchestrate or schedule a set of jobs
+version: 2
+jobs:
+  build:
+    docker:
+    - image: circleci/ruby:2.4
+    steps:
+    - checkout
+    - run: bundle install
+  test1:
+    docker:
+    - image: circleci/ruby:2.4
+    steps:
+    - checkout
+    - run: bundle install
+  test2:
+    docker:
+    - image: circleci/ruby:2.4
+    steps:
+    - checkout
+    - run: bundle install
+
+#workflows:
+  #version: 2
+  #my_workflows:
+    #jobs:
+    #- build
+    #- test1
+    #- test2
+
 workflows:
-  # Name the workflow "welcome"
-  welcome:
-    # Run the welcome/run job in its own container
+  version: 2
+  myworkflows:
     jobs:
-      - welcome/run
+    - build
+    - test1:
+        requires:
+          - build
+    #- test2:
+        #requires:
+          #- test1
+    #- hold:
+        #type: approval
+        #requires:
+          #- test2
+    #- deploy:
+        #requires:
+          #- hold
